@@ -1,22 +1,25 @@
 import React from 'react';
 import _ from 'lodash';
+import usePrevious from './hooks/usePrevious';
 
 const Profile = () => {
     const [user, setUser] = React.useState({name: 'Alex', weight: 40})
  
+    const previousUser = usePrevious(user);
+
     React.useEffect(() => {
-        const previousUser = previousUserRef.current;
+        // const previousUser = previousUserRef.current;
         console.log(`1-previousUser weight ${previousUser ? previousUser.weight : 'none'}`);
        if (!_.isEqual(previousUser, user)) {
            console.log('You need to do exercise!');
        }
     });
 
-    const previousUserRef = React.useRef();
-    React.useEffect(() => {
-        previousUserRef.current = user;
-        console.log(`2 - previousUser weight ${previousUserRef.current.weight}`);
-    });
+    // const previousUserRef = React.useRef();
+    // React.useEffect(() => {
+    //     previousUserRef.current = user;
+    //     console.log(`2 - previousUser weight ${previousUserRef.current.weight}`);
+    // });
  
     const gainWeight = () => {
        const newWeight = Math.random() >= 0.5 ? user.weight : user.weight + 1
